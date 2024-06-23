@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class MigratoryBirds {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Read number of sightings
+        int n = scanner.nextInt();
+        
+        // Read the list of bird sightings
+        List<Integer> sightings = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            sightings.add(scanner.nextInt());
+        }
+        
+        // Create a map to count occurrences of each bird type
+        Map<Integer, Integer> birdCountMap = new HashMap<>();
+        
+        for (int birdType : sightings) {
+            birdCountMap.put(birdType, birdCountMap.getOrDefault(birdType, 0) + 1);
+        }
+        
+        // Variables to track the most frequent bird type and its count
+        int maxCount = 0;
+        int mostFrequentBird = -1; // Initialize with -1 to handle cases where all frequencies are 0
+        
+        // Find the bird type with the highest frequency
+        for (Map.Entry<Integer, Integer> entry : birdCountMap.entrySet()) {
+            int birdType = entry.getKey();
+            int count = entry.getValue();
+            
+            // If this bird type has a higher count
+            if (count > maxCount) {
+                maxCount = count;
+                mostFrequentBird = birdType;
+            }
+        }
+        
+        // Output the most frequently sighted bird type
+        System.out.println(mostFrequentBird);
+        
+        scanner.close();
+    }
+}
